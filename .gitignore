@@ -1,0 +1,6 @@
+
+\.ipynb_checkpoints/
+
+ares/__pycache__/
+
+*.hdf
