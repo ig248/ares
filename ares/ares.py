@@ -24,10 +24,14 @@ def adaptive_resampling_index(y, thresholds=0, start_stride=None):
     idx = np.zeros(len(y))
     idx[::start_stride] = num_scales
     idx[-1] = num_scales
+    num_points = 0
     max_err = np.inf
     for scale, threshold in enumerate(thresholds):
-        while max_err > threshold:
+        ctr = 0
+        while max_err > threshold and num_points < len(y):
+            ctr = ctr + 1
             points = np.nonzero(idx)[0]
+            num_points = len(points)
             max_err = 0
             for start_pt, end_pt in zip(points[:-1], points[1:]):
                 rel_idx, err = _intermediate_point(y[start_pt:end_pt+1])
