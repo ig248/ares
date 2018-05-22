@@ -4,3 +4,5 @@
 ares/__pycache__/
 
 *.hdf
+
+ares\.egg-info/
