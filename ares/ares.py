@@ -13,7 +13,7 @@ def _intermediate_point(x):
     return i, err
 
 
-def adaptive_resampling_index(y, thresholds=0, start_stride=None):
+def adaptive_resampling_index(y, thresholds=0, start_stride=None, verbose=0):
     """Pick sub-samples that preserve overall appearance of the graph"""
     if isinstance(thresholds, (int, float)):
         thresholds = [thresholds]
@@ -28,7 +28,11 @@ def adaptive_resampling_index(y, thresholds=0, start_stride=None):
     max_err = np.inf
     for scale, threshold in enumerate(thresholds):
         ctr = 0
+        if verbose:
+            print('Target threshold: ', threshold)
         while max_err > threshold and num_points < len(y):
+            if verbose:
+                print('- error: ', max_err)
             ctr = ctr + 1
             points = np.nonzero(idx)[0]
             num_points = len(points)
