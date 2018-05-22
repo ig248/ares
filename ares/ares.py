@@ -42,4 +42,6 @@ def adaptive_resampling_index(y, thresholds=0, start_stride=None, verbose=0):
                 max_err = max(max_err, err)
                 if rel_idx and err > threshold:
                     idx[start_pt + rel_idx] = num_scales - scale
+            if verbose:
+                print('- error: ', max_err)
     return idx
